@@ -4,34 +4,36 @@ function [mse, energy_loss] = analyze_filter(b, a, x_n, energy_x, N, f, w, filte
     % 1. Pole-Zero Plot
     figure('Name', [filter_name ': Pole-Zero Plot']);
     zplane(b, a);
-    title(['Pole-Zero Plot for ', filter_name, ' Filter']);
+    title(['Pole-Zero Plot for ', filter_name, ' LPF Filter']);
     grid on;
 
     % 2. Magnitude and Phase Response
     H = freqz(b, a, N, 'whole');
+    phi = phasez(b, a, N, 'whole');
     figure('Name', [filter_name ': Frequency Response']);
     
     % Magnitude
     subplot(2,1,1);
     plot(f / 1000, 20*log10(abs(fftshift(H))));
-    title(['Magnitude Response for ', filter_name, ' Filter']);
+    title(['Magnitude Response for ', filter_name, ' LPF Filter']);
     xlabel('Frequency (kHz)');
     ylabel('Magnitude (dB)');
-    grid on; ylim([-100, 5]);
+    grid on; xlim([-24 24]);
+    yl = ylim; ylim([yl(1) 50]);
     
     % Phase Response
     subplot(2,1,2);
-    plot(f / 1000, unwrap(rad2deg(angle(fftshift(H)))));
-    title(['Phase Response for ', filter_name, ' Filter']);
+    plot(f / 1000, fftshift(rad2deg(phi)));
+    title(['Phase Response for ', filter_name, ' LPF Filter']);
     xlabel('Frequency (kHz)');
-    ylabel('Phase (radians)');
+    ylabel('Phase (degrees)');
     grid on; xlim([-24, 24]);
 
     % 3. Group Delay
     gd = grpdelay(b, a, N, 'whole');
     figure('Name', [filter_name ': Group Delay']);
     plot(w/pi, gd);
-    title(['Group Delay for ', filter_name, ' Filter']);
+    title(['Group Delay for ', filter_name, ' LPF Filter']);
     xlabel('Normalized Angular Frequency (\pi rad/s)');
     ylabel('Group Delay (samples)');
     grid on;
@@ -39,7 +41,7 @@ function [mse, energy_loss] = analyze_filter(b, a, x_n, energy_x, N, f, w, filte
     % 4. Impulse Response
     figure('Name', [filter_name ': Impulse Response']);
     impz(b, a);
-    title(['Impulse Response for ', filter_name, ' Filter']);
+    title(['Impulse Response for ', filter_name, ' LPF Filter']);
     grid on;
     
     % MSE
