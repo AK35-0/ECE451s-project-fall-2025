@@ -6,6 +6,18 @@
 
 clc; clear; close all;
 
+diary off;
+log_filename = 'simulation_log.txt'; % Define your file name
+
+% Check if the file exists from a previous run, and DELETE it.
+if exist(log_filename, 'file')
+    delete(log_filename);
+end
+
+% Start the new log file
+diary(log_filename);
+diary on;
+
 audio_path = 'sample_audio_file.wav'; % Audio file path!
 try
     [x_n, Fs] = audioread(audio_path);
