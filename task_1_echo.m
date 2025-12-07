@@ -3,7 +3,7 @@
 
 %% Load Audio Parameters
 
-clc; clear; close all;
+clear; close all;
 
 try
     % Load x_n (audio signal), N (length), and Fs (sampling frequency)
@@ -26,6 +26,7 @@ end
 
 % MSE calculation and Echo system Plots
 [MSE_y1, ~] = analyze_system(b_h, a_h, x_n, 0, N, Fs, 'Echo System H(z)');
+fprintf('--- Task 1: Echo system and Equalization (ZF) ---\n');
 fprintf('MSE_y1 (Echo Signal vs Original): %.3e\n', MSE_y1);
 
 %% 2. Equalizer System G(z)
