@@ -6,10 +6,10 @@
 clc; clear; close all;
 
 try
-    % Load x_n (audio signal), N (length), and Fs (sampling frequency)
-    load('project_parameters.mat', 'x_n', 'X_k', 'N', 'n', 'f', 'w', 'Fs', 'Energy_n');
+    % Load x_n (audio signal) and its Energy, N (audio length), Fs (sampling frequency)
+    load('project_parameters.mat', 'x_n', 'Energy_n', 'N', 'Fs');
 catch
-    disp('ERROR: project_parameters.mat not found. Please run task_0_audio.m first.');
+    disp('ERROR: project_parameters.mat not found. Please run task_0.m first.');
     return;
 end
 
@@ -29,7 +29,7 @@ fprintf('--- Task 2: LPF Design ---\n');
 fprintf('Fs: %.0f Hz, Wp: %.3f, Ws: %.3f\n', Fs, Wp, Ws);
 
 % Comparison storage
-filter_names = {'Butterworth', 'Cheby-I', 'Cheby-II', 'Elliptic'};
+filter_names = {'Butterworth LPF', 'Cheby-I LPF', 'Cheby-II LPF', 'Elliptic LPF'};
 filter_orders = zeros(1, 4);
 filter_MSEs = zeros(1, 4);
 filter_energy_loss = zeros(1, 4);
@@ -48,7 +48,7 @@ filter_orders(design_num) = n_butt;
 % Analyze and plot
 fprintf('\n--- %s Filter Analysis ---\n', name);
 fprintf('Order (n): %d\n', n_butt);
-[mse, energy_loss] = analyze_filter(b_butt, a_butt, x_n, Energy_n, N, f, w, name);
+[mse, energy_loss] = analyze_filter(b_butt, a_butt, x_n, Energy_n, 1024, Fs, name);
 filter_MSEs(design_num) = mse;
 filter_energy_loss(design_num) = energy_loss;
 
@@ -66,7 +66,7 @@ filter_orders(design_num) = n_cheb1;
 % Analyze and plot
 fprintf('\n--- %s Filter Analysis ---\n', name);
 fprintf('Order (n): %d\n', n_cheb1);
-[mse, energy_loss] = analyze_filter(b_cheb1, a_cheb1, x_n, Energy_n, N, f, w, name);
+[mse, energy_loss] = analyze_filter(b_cheb1, a_cheb1, x_n, Energy_n, 1024, Fs, name);
 filter_MSEs(design_num) = mse;
 filter_energy_loss(design_num) = energy_loss;
 
@@ -84,7 +84,7 @@ filter_orders(design_num) = n_cheb2;
 % Analyze and plot
 fprintf('\n--- %s Filter Analysis ---\n', name);
 fprintf('Order (n): %d\n', n_cheb2);
-[mse, energy_loss] = analyze_filter(b_cheb2, a_cheb2, x_n, Energy_n, N, f, w, name);
+[mse, energy_loss] = analyze_filter(b_cheb2, a_cheb2, x_n, Energy_n, 1024, Fs, name);
 filter_MSEs(design_num) = mse;
 filter_energy_loss(design_num) = energy_loss;
 
@@ -102,7 +102,7 @@ filter_orders(design_num) = n_ellip;
 % Analyze and plot
 fprintf('\n--- %s Filter Analysis ---\n', name);
 fprintf('Order (n): %d\n', n_ellip);
-[mse, energy_loss] = analyze_filter(b_ellip, a_ellip, x_n, Energy_n, N, f, w, name);
+[mse, energy_loss] = analyze_filter(b_ellip, a_ellip, x_n, Energy_n, 1024, Fs, name);
 filter_MSEs(design_num) = mse;
 filter_energy_loss(design_num) = energy_loss;
 
@@ -118,6 +118,6 @@ fprintf('Filter with minimum MSE: %s Filter (MSE = %.3e)\n', filter_names{idx_ms
 [min_loss, idx_loss] = min(filter_energy_loss);
 fprintf('Filter with minimum energy loss: %s Filter (Loss = %.2f%%)\n', filter_names{idx_loss}, min_loss);
 
-%% Save Parameters (Filter Coefficients) for task 3
-% Save the Butterworth filter parameters
-save('Butterworth_filter_parameters.mat', 'b_butt', 'a_butt', 'Fs');
+%% Append Butterworth LPF coefficients in Parameters file
+save('project_parameters.mat', 'b_butt', 'a_butt', '-append');
+fprintf('\n\n--> Butterworth filter coefficients saved for Task 3.\n');
