@@ -118,3 +118,6 @@ fprintf('Filter with minimum MSE: %s Filter (MSE = %.3e)\n', filter_names{idx_ms
 [min_loss, idx_loss] = min(filter_energy_loss);
 fprintf('Filter with minimum energy loss: %s Filter (Loss = %.2f%%)\n', filter_names{idx_loss}, min_loss);
 
+%% Save Parameters (Filter Coefficients) for task 3
+% Save the Butterworth filter parameters
+save('Butterworth_filter_parameters.mat', 'b_butt', 'a_butt', 'Fs');
