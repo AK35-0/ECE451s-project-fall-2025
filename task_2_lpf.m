@@ -118,6 +118,6 @@ fprintf('Filter with minimum MSE: %s Filter (MSE = %.3e)\n', filter_names{idx_ms
 [min_loss, idx_loss] = min(filter_energy_loss);
 fprintf('Filter with minimum energy loss: %s Filter (Loss = %.2f%%)\n', filter_names{idx_loss}, min_loss);
 
-%% Append Butterworth LPF coefficients in Parameters file
-save('project_parameters.mat', 'b_butt', 'a_butt', '-append');
+%% Append Butterworth LPF parameters in Parameters file
+save('project_parameters.mat', 'b_butt', 'a_butt', 'n_butt', '-append');
 fprintf('\n\n--> Butterworth filter coefficients saved for Task 3.\n');
