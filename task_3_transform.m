@@ -4,7 +4,7 @@
 
 %% Load Parameters
 
-clc; clear; close all;
+clear; close all;
 
 try
     % Load Fs (sampling frequency), and Butterworth LPF parameters
@@ -52,3 +52,5 @@ analyze_filter(k_bpf * b_bpf, a_bpf, 0, 0, 1024, Fs, 'Transsformed BPF');
 fprintf('--------------------------------------------\n');
 fprintf('-> BPF transformed successfully (of order %d)\n', 2*n_butt);
 fprintf('--------------------------------------------\n\n');
+
+diary off;
