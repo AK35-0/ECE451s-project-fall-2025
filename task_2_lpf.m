@@ -3,7 +3,7 @@
 
 %% Load Audio Parameters
 
-clc; clear; close all;
+clear; close all;
 
 try
     % Load x_n (audio signal) and its Energy, N (audio length), Fs (sampling frequency)
