@@ -1,0 +1,61 @@
+--- Task 0: Audio File Info ---
+Sampling Frequency (Fs): 48000 Hz
+Total Samples (N): 2097152
+Duration: 43.69 seconds
+Total Energy (Time Domain): 2018.63
+Total Energy (Frequency Domain): 2018.63
+----------------------------------
+--- Task 1: Echo system and Equalization (ZF) ---
+MSE_y1 (Echo Signal vs Original): 1.888e-03
+MSE_y2 (Equalized Signal vs Original): 0.00
+----------------------------------
+--- Task 2: LPF Design ---
+Fs: 48000 Hz, Wp: 0.125, Ws: 0.167
+
+--- Butterworth LPF Filter Analysis ---
+Order (n): 22
+MSE (Filtered vs Original): 1.839e-03
+Energy Loss: 3.37 %
+
+--- Cheby-I LPF Filter Analysis ---
+Order (n): 9
+MSE (Filtered vs Original): 1.764e-03
+Energy Loss: 15.58 %
+
+--- Cheby-II LPF Filter Analysis ---
+Order (n): 9
+MSE (Filtered vs Original): 1.021e-03
+Energy Loss: 3.17 %
+
+--- Elliptic LPF Filter Analysis ---
+Order (n): 6
+MSE (Filtered vs Original): 1.072e-03
+Energy Loss: 14.14 %
+
+
+--- Filters Comparison ---
+     Filter Type       	Order      MSE       Energy Loss (%)
+    ________________   _______   _______     _______________
+
+    Butterworth LPF     22      0.0018391        3.3681     
+    Cheby-I LPF          9      0.0017637        15.576     
+    Cheby-II LPF         9      0.0010205        3.1685     
+    Elliptic LPF         6      0.0010718        14.144     
+
+Filter with minimum MSE: Cheby-II LPF Filter (MSE = 1.021e-03)
+Filter with minimum energy loss: Cheby-II LPF Filter (Loss = 3.17%)
+
+
+--> Butterworth filter coefficients saved for Task 3.
+
+--- Task 3: LPF transform to HPF and BPF ---
+Skipping MSE and Energy Loss calculation (No input signal provided).
+-------------------------------
+-> HPF transformed successfully
+-------------------------------
+
+Skipping MSE and Energy Loss calculation (No input signal provided).
+--------------------------------------------
+-> BPF transformed successfully (of order 44)
+--------------------------------------------
+
