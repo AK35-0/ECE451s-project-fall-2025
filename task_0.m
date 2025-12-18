@@ -6,18 +6,6 @@
 
 clc; clear; close all;
 
-diary off;
-log_filename = 'simulation_log.txt'; % Define your file name
-
-% Check if the file exists from a previous run, and DELETE it.
-if exist(log_filename, 'file')
-    delete(log_filename);
-end
-
-% Start the new log file
-diary(log_filename);
-diary on;
-
 audio_path = 'sample_audio_file.wav'; % Audio file path!
 try
     [x_n, Fs] = audioread(audio_path);
@@ -94,4 +82,4 @@ fprintf('----------------------------------\n');
 
 %% Save Parameters for other tasks
 % Save the signal x, its length N, and the sampling frequency Fs
-save('project_parameters.mat', 'x_n', 'X_k', 'N', 'n', 'f', 'w', 'Fs', 'Energy_n');
+save('project_parameters.mat', 'x_n', 'X_k', 'N', 'Fs', 'Energy_n');
