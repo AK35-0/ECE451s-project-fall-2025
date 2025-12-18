@@ -3,11 +3,11 @@
 
 %% Load Audio Parameters
 
-clear; close all;
+clc; clear; close all;
 
 try
     % Load x_n (audio signal), N (length), and Fs (sampling frequency)
-    load('project_parameters.mat', 'x_n', 'X_k', 'N', 'n', 'f', 'w', 'Fs', 'Energy_n');
+    load('project_parameters.mat', 'x_n', 'X_k', 'N', 'Fs', 'Energy_n');
 catch
     disp('ERROR: project_parameters.mat not found. Please run task_0.m first.');
     return;
@@ -26,7 +26,6 @@ end
 
 % MSE calculation and Echo system Plots
 [MSE_y1, ~] = analyze_system(b_h, a_h, x_n, 0, N, Fs, 'Echo System H(z)');
-fprintf('--- Task 1: Echo system and Equalization (ZF) ---\n');
 fprintf('MSE_y1 (Echo Signal vs Original): %.3e\n', MSE_y1);
 
 %% 2. Equalizer System G(z)
